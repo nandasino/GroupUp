@@ -1,17 +1,17 @@
 import { useContext, useState } from "react";
-import UserContext from "../../contexts/UserContext";
 import Logo from "../../assets/images/Logo.png"
 import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function SignIn() {
+export default function SignUp() {
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
   const [disabled, setDisabled] = useState(false);
-  const [signIn, setSignIn] = useState({
+  const [formValue, setFormValue] = useState({
+    name: "",
     email: "",
     password: "",
+    confirm: "",
   });
 
   function handleForm(e) {
@@ -20,7 +20,7 @@ export default function SignIn() {
   }
 
   function handleInput(e) {
-    setSignIn({ ...signIn, [e.target.name]: e.target.value });
+    setFormValue({ ...formValue, [e.target.name]: e.target.value });
   }
 
   return(
@@ -31,12 +31,12 @@ export default function SignIn() {
         <form onSubmit={handleForm}>
           <input
             autoComplete="off"
-            value={signIn.email}
             required
             disabled={disabled}
             name="email"
             type="email"
             placeholder="email"
+            value={formValue.email}
             onChange={handleInput}
           />
           <input
@@ -45,18 +45,45 @@ export default function SignIn() {
             name="password"
             type= "password"
             placeholder="senha"
+            value={formValue.password}
             onChange={handleInput}
-            value={signIn.password}
+          />
+          <input
+            required
+            disabled={disabled}
+            name="confirmpassword"
+            type= "password"
+            value={formValue.confirm}
+            placeholder="confirme a senha"
+            onChange={handleInput}
+          />
+          <input
+            disabled={disabled}
+            required
+            name="name"
+            value={formValue.name}
+            type="text"
+            placeholder="nome"
+            onChange={handleInput}
+          />
+          <input
+            disabled={disabled}
+            required
+            name="image"
+            value={formValue.image}
+            type="url"
+            placeholder="foto"
+            onChange={handleInput}
           />
           <button disabled={disabled} type="submit">
             {!disabled ?
-              ("Entrar") 
+              ("Cadastrar") 
               :
               (<ThreeDots color="#FFFFFF" height={80} width={80} />)
             }
           </button>          
         </form>
-        <Link to={`/sign-up`}>Não tem uma conta? Cadastre-se!</Link>
+        <Link to={`/`}>Já tem uma conta? Faça login!</Link>
       </Container>
     </>
   )
