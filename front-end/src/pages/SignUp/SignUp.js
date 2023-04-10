@@ -3,20 +3,34 @@ import Logo from "../../assets/images/Logo.png"
 import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
+import { postSignUp } from "../../services/GroupUp";
 
 export default function SignUp() {
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const [formValue, setFormValue] = useState({
     name: "",
+    image: "",
     email: "",
     password: "",
-    confirm: "",
+    confirmPassword: "",
   });
 
-  function handleForm(e) {
+
+  async function handleForm(e) {
     e.preventDefault();
-    console.log("eeeeh")
+    try {
+      await postSignUp({
+        name: formValue.name,
+        image:formValue.image,
+        email: formValue.email,
+        password: formValue.password,
+        confirmPassword: formValue.confirmPassword,
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function handleInput(e) {
@@ -51,9 +65,9 @@ export default function SignUp() {
           <input
             required
             disabled={disabled}
-            name="confirmpassword"
+            name="confirmPassword"
             type= "password"
-            value={formValue.confirm}
+            value={formValue.confirmPassword}
             placeholder="confirme a senha"
             onChange={handleInput}
           />

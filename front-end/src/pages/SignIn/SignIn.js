@@ -4,6 +4,7 @@ import Logo from "../../assets/images/Logo.png"
 import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
+import { postSignIn } from "../../services/GroupUp";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -14,10 +15,22 @@ export default function SignIn() {
     password: "",
   });
 
-  function handleForm(e) {
+  async function handleForm(e) {
     e.preventDefault();
-    console.log("eeeeh")
-  }
+    try {
+      const data = await postSignIn({
+        email: signIn.email,
+        password: signIn.password,
+      });
+      const JSONauth = JSON.stringify({
+        token: data.data.token,
+      });
+      localStorage.setItem("groupUp", JSONauth);
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   function handleInput(e) {
     setSignIn({ ...signIn, [e.target.name]: e.target.value });
