@@ -3,7 +3,8 @@ import { useStates } from "./hooks/statesApi";
 import { useCities } from "./hooks/citiesApi";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { postCity } from "../../services/GroupUp";
+//import { postCity } from "../../services/GroupUp";
+import { updateCity } from "../../services/GroupUp";
 
 export default function CityForm() {
   const { states } = useStates();
@@ -21,7 +22,7 @@ export default function CityForm() {
     console.log(e.target.value)
   }
   
-  async function sendCity(e) {
+  /*async function sendCity(e) {
     e.preventDefault();
     if(citySelected == "") {
       console.log("selecione uma cidade")
@@ -29,6 +30,21 @@ export default function CityForm() {
     }
     try {
       await postCity({
+        city: citySelected,
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }*/
+  async function sendCity(e) {
+    e.preventDefault();
+    if(citySelected == "") {
+      console.log("selecione uma cidade")
+      return;
+    }
+    try {
+      await updateCity({
         city: citySelected,
       });
       navigate("/");

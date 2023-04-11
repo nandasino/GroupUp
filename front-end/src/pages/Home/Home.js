@@ -8,9 +8,11 @@ import Footer from "../../components/Footer/Footer";
 
 export default function Home() {
   const [close, setClose] = useState(false);
-  const [userCity, setUserCity] = useState(null);
+  const auth = JSON.parse(localStorage.getItem("groupUp"));
+  const userCity = auth.city;
+  //const [userCity, setUserCity] = useState(null);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchData = async () => {
       try {
         const cityData = (await getUserCity()).data;
@@ -23,8 +25,7 @@ export default function Home() {
       }
     };
     fetchData();
-  }, []);
-
+  }, []);*/
 
   return(
     <>

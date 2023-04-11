@@ -25,6 +25,7 @@ export default function SignIn() {
       const JSONauth = JSON.stringify({
         token: data.data.token,
         image: data.data.image,
+        city: data.data.city,
       });
       setUser(data.data);
       localStorage.setItem("groupUp", JSONauth);
