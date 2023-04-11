@@ -24,7 +24,9 @@ export default function SignIn() {
       });
       const JSONauth = JSON.stringify({
         token: data.data.token,
+        image: data.data.image,
       });
+      setUser(data.data);
       localStorage.setItem("groupUp", JSONauth);
       navigate("/home");
     } catch (error) {
@@ -84,7 +86,7 @@ const Container = styled.section`
     margin-top: 48px;
   }
   h1 {
-    font-family: 'Righteous', cursive;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 32px;
@@ -114,7 +116,7 @@ const Container = styled.section`
     outline: 0;
   }
   button {
-    font-family: "Lexend Deca";
+    font-family: 'Roboto', sans-serif;
     border: none;
     background-color: #52b6ff;
     border-radius: 4.5px;
@@ -132,5 +134,6 @@ const Container = styled.section`
     font-size: 14px;
     align-self: center;
     margin-top: 25px;
+    font-family: 'Roboto', sans-serif;
   }
 `

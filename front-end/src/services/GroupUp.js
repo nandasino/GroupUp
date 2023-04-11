@@ -21,7 +21,30 @@ async function postSignUp(signUp) {
   return promise;
 }
 
+
+async function postCity(city) {
+  const config = createHeaders();
+  const promise = await axios.post(`${process.env.REACT_APP_API}/cities`, city, config);
+  return promise;
+}
+
+async function getUserCity() {
+  const config = createHeaders();
+  const promise = await axios.get(`${process.env.REACT_APP_API}/cities`, config);
+  return promise;
+}
+
+
+async function getCityEvents(city) {
+  const config = createHeaders();
+  const promise = await axios.get(`${process.env.REACT_APP_API}/events/${city}`, config);
+  return promise;
+}
+
 export {
   postSignIn,
   postSignUp,
+  postCity,
+  getUserCity,
+  getCityEvents,
 };

@@ -26,11 +26,12 @@ export async function signIn(req, res){
 
         const userExists = await db.query("SELECT * FROM  users WHERE email = $1", [email]);
         const user = userExists.rows[0];
+        const image = user.image
         const secretKey = process.env.JWT_SECRET;
         const token = jwt.sign({ userId: user.id }, secretKey);
         await db.query('INSERT INTO sessions ("userId", token) VALUES ($1, $2);', [user.id, token]);
 
-        res.status(200).send({ token });
+        res.status(200).send({ token , image });
     }catch(error){
         res.sendStatus(500);
         console.log(error);
