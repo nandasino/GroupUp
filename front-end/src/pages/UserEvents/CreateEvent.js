@@ -6,8 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useStates } from "../CityForm/hooks/statesApi.js";
 import { useCities } from "../CityForm/hooks/citiesApi.js";
 import { getCategories } from "../../services/GroupUp.js";
-import { useContext } from "react";
-import UserContext from "../../contexts/UserContext";
+import Counter from "./hooks/Counter.js";
 
 export default function CreateEvent() {
   const[selectedDate, setSelectedDate] = useState(null)
@@ -17,9 +16,14 @@ export default function CreateEvent() {
   const [ citySelected, setCitySelected ] = useState("");
   const [categories, setCategories] = useState([]);
   const [ categorySelected, setCategorySelected ] = useState("");
-  const { user } = useContext(UserContext);
   const [ isPublic, setIsPublic ] = useState(true);
   const auth = JSON.parse(localStorage.getItem("groupUp"));
+  const [post, setPost] = useState({
+    address: "",
+    description: "",
+	});
+  const [counter, setCounter] = useState(1);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +48,11 @@ export default function CreateEvent() {
   const handleFormCategory = (e) => {
     setCategorySelected(e.target.value);
   }
+
+  function handleInput(e) {
+		setPost({ ...post, [e.target.name]: e.target.value });
+	}
+
   const dateFormatAux = (date) => {
     const d = new Date(date);
     let month = '' + (d.getMonth() + 1)
@@ -55,7 +64,7 @@ export default function CreateEvent() {
     if(day.length < 2) {
       day = '0'+ day;
     }
-    return [day,month,year].join('-');
+    return [day,month,year].join('/');
   }
  
   async function handleForm(e) {
@@ -71,66 +80,93 @@ export default function CreateEvent() {
     const string = new Date(selectedDate).toString();
     const hour = string.substr(16, 5);
     const date = dateFormatAux(selectedDate);
-    console.log(date);
-    console.log(hour);
-    console.log(citySelected);
-    console.log(categorySelected);
-    console.log(user.id)
+
+    const postObject = {
+			date: date,
+      hour: hour,
+      public: isPublic,
+      city: citySelected,
+      address: post.address,
+      category: categorySelected,
+			vacancies: counter,
+      description: post.description,
+    }
+    console.log(postObject);
 
   }
   return(
     <>
       <PostsStyle>
         <Title>
-        <img className="profile" src={auth.image} alt="Profile"/>
-        <h1>Forme um grupo</h1>
+          <img className="profile" src={auth.image} alt="Profile"/>
+          <h1>Forme um grupo</h1>
         </Title>
-      <Container>
-      <form onSubmit={handleForm}>
-        <DatePrivate>
-        <DatePicker 
-        selected={selectedDate}
-        onChange={(date) => setSelectedDate(date)}
-        className="form-field"
-        showTimeSelect
-        id="date"
-        placeholderText="Data"
-        dateFormat="dd/MM/yyyy "
-        required
-        />
-        <Public onClick={()=> setIsPublic(!isPublic)}>
-        { isPublic ? 
-          <><p>Público</p><ion-icon name="earth-sharp">
-          </ion-icon></> : 
-          <><p>Privado</p><ion-icon name="lock-closed-sharp"></ion-icon></>}
-        </Public>
-        </DatePrivate>
-        <City>
-        <select onChange= { handleFormState }>
-          {states.map((state) => (<option value={state.sigla}>{state.nome}</option>))}
-        </select>
-        {stateSelected !== "" ? 
-        (
-        <select onChange={handleFormCity}>
-            {cities.map((city) => (<option value={city.nome}>{city.nome}</option>))}
-        </select>
-        ) : "" }
-        </City>
-        <input className="address" type="text" placeholder="Endereço"/>
-        <Game>
-        <select onChange= { handleFormCategory }>
-          {categories.map((category) => (<option value={category.id}>{category.name}</option>))}
-        </select>
-        <input className="number" placeholder="Vagas" type="number"></input>
-        </Game>
-        <input className="description" type="text" placeholder="Descrição"/>
-          <Button>
-            <button className="sendButton" type="submit">
-              Postar Evento
-            </button> 
-          </Button>
-      </form>
-      </Container>
+        <Container>
+          <form onSubmit={handleForm}>
+            <DatePrivate>
+              <DatePicker 
+              selected={selectedDate}
+              onChange={(date) => setSelectedDate(date)}
+              className="form-field"
+              showTimeSelect
+              id="date"
+              placeholderText="Data"
+              dateFormat="dd/MM/yyyy "
+              required
+              />
+              <Public onClick={()=> setIsPublic(!isPublic)}>
+              { 
+                isPublic ? 
+                (<><p>Público</p>
+                <ion-icon name="earth-sharp">
+                </ion-icon></>)
+                : 
+                (<><p>Privado</p>
+                <ion-icon name="lock-closed-sharp"></ion-icon></>)
+                }
+              </Public>
+            </DatePrivate>
+            <City>
+              <select onChange= { handleFormState }>
+                {states.map((state) => (<option value={state.sigla}>{state.nome}</option>))}
+              </select>
+              {stateSelected !== "" ? 
+                (
+                  <select onChange={handleFormCity}>
+                    {cities.map((city) => (<option value={city.nome}>{city.nome}</option>))}
+                  </select>
+                ) : "" }
+            </City>
+            <input 
+              name="address"
+              className="address" 
+              onChange={handleInput} 
+              value={post.address} 
+              type="text" 
+              placeholder="Endereço"
+              required
+            />
+            <Game>
+              <select onChange= { handleFormCategory }>
+                {categories.map((category) => (<option value={category.id}>{category.name}</option>))}
+              </select>
+              <Counter counter={counter} setCounter={setCounter}/>
+            </Game>
+            <input
+            name="description"
+            className="description"
+            onChange={handleInput}
+            value={post.description}
+            type="text" 
+            placeholder="Descrição"
+            />
+            <Button>
+              <button className="sendButton" type="submit">
+                Postar Evento
+              </button> 
+            </Button>
+          </form>
+        </Container>
       </PostsStyle>
     </>
   )
