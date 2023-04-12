@@ -44,6 +44,13 @@ async function getCategories() {
   return promise;
 }
 
+
+async function postEvent(event) {
+  const config = createHeaders();
+  const promise = await axios.post(`${process.env.REACT_APP_API}/events`, event, config);
+  return promise;
+}
+
 export {
   postSignIn,
   postSignUp,
@@ -51,4 +58,5 @@ export {
   updateCity,
   getUser,
   getCategories,
+  postEvent,
 };

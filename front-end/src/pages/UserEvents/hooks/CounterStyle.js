@@ -27,20 +27,6 @@ h2 {
   width: 60px;
 }
 
-button {
-  display: flex;
-  justify-content: center ;
-  align-items: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
-  border: none;
-  color: white;
-  font-size: 24px;
-  background-color: #0057ae;
-  font-size: 20px;
-}
-
 .cell .value {
   font-weight: 500;
 }
@@ -54,6 +40,21 @@ button {
 }
 
 `
+const Button = styled.div`
+  display: flex;
+  justify-content: center ;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-size: 24px;
+  background-color: #0057ae;
+  font-size: 20px;
+`
+
 export {
-  CounterStyle
+  CounterStyle,
+  Button
 }

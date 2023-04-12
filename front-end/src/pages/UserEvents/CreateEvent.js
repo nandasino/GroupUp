@@ -7,6 +7,7 @@ import { useStates } from "../CityForm/hooks/statesApi.js";
 import { useCities } from "../CityForm/hooks/citiesApi.js";
 import { getCategories } from "../../services/GroupUp.js";
 import Counter from "./hooks/Counter.js";
+import { postEvent } from "../../services/GroupUp.js";
 
 export default function CreateEvent() {
   const[selectedDate, setSelectedDate] = useState(null)
@@ -64,7 +65,7 @@ export default function CreateEvent() {
     if(day.length < 2) {
       day = '0'+ day;
     }
-    return [day,month,year].join('/');
+    return [year,month,day].join('-');
   }
  
   async function handleForm(e) {
@@ -80,19 +81,23 @@ export default function CreateEvent() {
     const string = new Date(selectedDate).toString();
     const hour = string.substr(16, 5);
     const date = dateFormatAux(selectedDate);
-
+    
     const postObject = {
 			date: date,
       hour: hour,
-      public: isPublic,
+      isPublic: isPublic,
       city: citySelected,
       address: post.address,
-      category: categorySelected,
+      categoryId: categorySelected,
 			vacancies: counter,
       description: post.description,
     }
-    console.log(postObject);
-
+    try {
+      await postEvent(postObject);
+      console.log(postObject);
+    } catch (error) {
+      console.log(error);
+    }
   }
   return(
     <>
