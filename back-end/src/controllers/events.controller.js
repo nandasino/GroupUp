@@ -57,3 +57,16 @@ export async function postEvent(req,res){
       res.sendStatus(500);
   }
 }
+
+export async function getUserEvents(req, res){
+  const userId = res.locals.idUser;
+  try{
+      const events = await eventsRepository.getEventsByUser(userId); 
+      if(events.rowCount==0){
+          return res.sendStatus(404);
+      }
+      res.status(200).send(events.rows);
+  }catch(error){
+      res.send(error);
+  }
+}

@@ -1,11 +1,11 @@
 import CreateEvent from "./CreateEvent.js"
-import Events from "./Events.js"
+import MapEvents from "./MapEvents.js"
 
 export default function UserEvents() {
   return(
     <>
       <CreateEvent/>
-      <Events/>
+      <MapEvents/>
     </>
   )
 }

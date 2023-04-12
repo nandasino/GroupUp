@@ -8,6 +8,8 @@ import { useCities } from "../CityForm/hooks/citiesApi.js";
 import { getCategories } from "../../services/GroupUp.js";
 import Counter from "./hooks/Counter.js";
 import { postEvent } from "../../services/GroupUp.js";
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext.js";
 
 export default function CreateEvent() {
   const[selectedDate, setSelectedDate] = useState(null)
@@ -24,14 +26,13 @@ export default function CreateEvent() {
     description: "",
 	});
   const [counter, setCounter] = useState(1);
-
+  const { setUpdate } = useContext(UserContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = (await getCategories()).data;
         setCategories(data);
-        console.log(data)
       } catch (error) {
         console.log(error);
       }
@@ -94,7 +95,8 @@ export default function CreateEvent() {
     }
     try {
       await postEvent(postObject);
-      console.log(postObject);
+      setUpdate(true);
+      console.log(postObject)
     } catch (error) {
       console.log(error);
     }

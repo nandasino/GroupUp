@@ -19,7 +19,7 @@ export default function CityEvents({userCity}) {
       {userCity==null ? 
       "Selecione sua cidade para descobrir quais eventos estão havendo nela"
       :
-      (<>{cityEvents.length==0 ? ("Não há eventos na sua cidade ainda"):(<>{cityEvents.map((event) => (<>{event.game}</>))}</>)}</>)}
+      (<>{cityEvents.length==0 ? ("Não há eventos na sua cidade ainda"):(<>{cityEvents.map((event) => (<>{event.categoryId}</>))}</>)}</>)}
     </>
   )
 }

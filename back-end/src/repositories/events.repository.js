@@ -11,3 +11,6 @@ export async function createEvent({ userId, date, hour, isPublic, city, address,
 	return db.query(`INSERT INTO events ("userId", date, hour, "isPublic", city, address, "categoryId", vacancies, description) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`,
   [userId, date, hour, isPublic, city, address, categoryId, vacancies, description]);
 }
+export async function getEventsByUser(userId) {
+	return db.query('SELECT * FROM events WHERE "userId" = $1 ORDER BY date;', [userId]);
+}

@@ -51,6 +51,12 @@ async function postEvent(event) {
   return promise;
 }
 
+async function getUserEvents() {
+  const config = createHeaders();
+  const promise = await axios.get(`${process.env.REACT_APP_API}/events`, config);
+  return promise;
+}
+
 export {
   postSignIn,
   postSignUp,
@@ -59,4 +65,5 @@ export {
   getUser,
   getCategories,
   postEvent,
+  getUserEvents,
 };

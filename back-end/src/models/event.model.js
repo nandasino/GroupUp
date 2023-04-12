@@ -8,5 +8,5 @@ export const eventSchema = joi.object({
   address: joi.string().min(1).max(50).required(),
   categoryId: joi.number().min(1).required(),
   vacancies: joi.number().min(1).required(),
-  description: joi.string().min(1).max(180),
+  description: joi.string().min(1).max(180)
 })
