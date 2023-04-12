@@ -13,3 +13,15 @@ export async function getCityEvents(req, res){
       res.send(error);
   }
 }
+
+export async function getCategories(req, res){
+  try{
+      const categories = await db.query('SELECT * FROM categories;'); 
+      if(categories.rowCount==0){
+          return res.sendStatus(404);
+      }
+      res.status(200).send(categories.rows);
+  }catch(error){
+      res.send(error);
+  }
+}

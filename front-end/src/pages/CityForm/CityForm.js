@@ -2,11 +2,10 @@ import styled from "styled-components";
 import { useStates } from "./hooks/statesApi";
 import { useCities } from "./hooks/citiesApi";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-//import { postCity } from "../../services/GroupUp";
+import { useNavigate } from "react-router-dom";
 import { updateCity } from "../../services/GroupUp";
 
-export default function CityForm() {
+export default function CityForm({setClose}) {
   const { states } = useStates();
   const [ stateSelected, setStateSelected ] = useState("");
   const { cities } = useCities({ uf: stateSelected });
@@ -19,24 +18,8 @@ export default function CityForm() {
 
   const handleFormCity = (e) => {
     setCitySelected(e.target.value);
-    console.log(e.target.value)
   }
   
-  /*async function sendCity(e) {
-    e.preventDefault();
-    if(citySelected == "") {
-      console.log("selecione uma cidade")
-      return;
-    }
-    try {
-      await postCity({
-        city: citySelected,
-      });
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  }*/
   async function sendCity(e) {
     e.preventDefault();
     if(citySelected == "") {
@@ -47,7 +30,11 @@ export default function CityForm() {
       await updateCity({
         city: citySelected,
       });
-      navigate("/");
+      const auth = JSON.stringify({
+        city: citySelected,
+      });
+      localStorage.setItem("city", auth);
+      setClose(true)
     } catch (error) {
       console.log(error);
     }
@@ -75,18 +62,19 @@ const Box = styled.div`
   margin-top: 20px;
   select {
     padding-left: 10px;
-    width: 200px;
+    width: 280px;
     min-height: 45px;
     border: 1px solid #d5d5d5;
     border-radius: 5px;
     margin-bottom: 6px;
     font-size: 15px;
+    background-color: #ffffff;
   }
   button {
     margin-top: 20px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lato';
     border: none;
-    background-color: #52b6ff;
+    background-color: #0057ae;
     border-radius: 4.5px;
     width: 180px;
     height: 45px;

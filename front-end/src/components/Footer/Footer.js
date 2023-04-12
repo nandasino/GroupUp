@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-export default function Footer() {
+export default function Footer({pageSelected, setPageSelected}) {
   const auth = JSON.parse(localStorage.getItem("groupUp"));
   console.log(auth.image)
-  const [pageSelected, setPageSelected] = useState({});
+  //const [pageSelected, setPageSelected] = useState({});
 
   function selectPage(page) {
     if (page === pageSelected) {
@@ -29,7 +29,7 @@ const Container = styled.div`
   width:100%;
   height: 100px;
   display: flex;
-  background-color: #FFFFFF;
+  background-color: #f2f2f2;
   align-items: center;
   justify-content: space-around;
   position:fixed;
@@ -50,10 +50,10 @@ const LogoDiv = styled.div`
   width: 150px;
   height: 80px;
   p {
-    font-family: 'Lexend Deca';
+    font-family: 'Lato';
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     margin-top:5px;
   }
   &.selected {

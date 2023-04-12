@@ -8,7 +8,6 @@ export default function CityEvents({userCity}) {
       try {
         const eventsData = (await getCityEvents(userCity)).data;
         setCityEvents(eventsData);
-        console.log(eventsData)
       } catch (error) {
         console.log(error);
       }
@@ -17,7 +16,10 @@ export default function CityEvents({userCity}) {
   }, []);
   return(
     <>
-      {cityEvents.length==0? ("Não há eventos na sua cidade ainda"):(<>{cityEvents.map((event) => (<>{event.game}</>))}</>)}
+      {userCity==null ? 
+      "Selecione sua cidade para descobrir quais eventos estão havendo nela"
+      :
+      (<>{cityEvents.length==0 ? ("Não há eventos na sua cidade ainda"):(<>{cityEvents.map((event) => (<>{event.game}</>))}</>)}</>)}
     </>
   )
 }

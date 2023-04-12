@@ -20,7 +20,7 @@ export default function Navbar() {
 
 const Container = styled.div`
   width:100%;
-  height: 80px;
+  height: 60px;
   display: flex;
   background-color: #0057ae;
   align-items: center;
@@ -30,7 +30,7 @@ const Container = styled.div`
   top: 0;
   left:0;
   img{
-    width: 70px
+    width: 60px;
   }
   .profile{
     border-radius:35px;

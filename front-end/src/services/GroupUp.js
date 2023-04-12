@@ -21,19 +21,6 @@ async function postSignUp(signUp) {
   return promise;
 }
 
-
-/*async function postCity(city) {
-  const config = createHeaders();
-  const promise = await axios.post(`${process.env.REACT_APP_API}/cities`, city, config);
-  return promise;
-}
-
-async function getUserCity() {
-  const config = createHeaders();
-  const promise = await axios.get(`${process.env.REACT_APP_API}/cities`, config);
-  return promise;
-}*/
-
 async function updateCity(city) {
   const config = createHeaders();
   const promise = await axios.put(`${process.env.REACT_APP_API}/usercity`, city, config);
@@ -46,11 +33,22 @@ async function getCityEvents(city) {
   return promise;
 }
 
+async function getUser() {
+  const config = createHeaders();
+  const promise = await axios.get(`${process.env.REACT_APP_API}/user`, config);
+  return promise;
+}
+
+async function getCategories() {
+  const promise = await axios.get(`${process.env.REACT_APP_API}/catergories`);
+  return promise;
+}
+
 export {
   postSignIn,
   postSignUp,
-  //postCity,
-  //getUserCity,
   getCityEvents,
   updateCity,
+  getUser,
+  getCategories,
 };

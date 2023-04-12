@@ -29,6 +29,11 @@ export default function SignIn() {
       });
       setUser(data.data);
       localStorage.setItem("groupUp", JSONauth);
+
+      const auth = JSON.stringify({
+        city: data.data.city,
+      });
+      localStorage.setItem("city", auth);
       navigate("/home");
     } catch (error) {
       console.log(error);
@@ -87,7 +92,7 @@ const Container = styled.section`
     margin-top: 48px;
   }
   h1 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Righteous', cursive;
     font-style: normal;
     font-weight: 500;
     font-size: 32px;
@@ -117,7 +122,7 @@ const Container = styled.section`
     outline: 0;
   }
   button {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lato';
     border: none;
     background-color: #52b6ff;
     border-radius: 4.5px;
@@ -135,6 +140,6 @@ const Container = styled.section`
     font-size: 14px;
     align-self: center;
     margin-top: 25px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lato';
   }
 `

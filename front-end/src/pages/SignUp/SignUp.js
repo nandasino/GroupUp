@@ -142,7 +142,7 @@ const Container = styled.section`
     outline: 0;
   }
   button {
-    font-family: "Lexend Deca";
+    font-family: 'Lato';
     border: none;
     background-color: #52b6ff;
     border-radius: 4.5px;
@@ -160,5 +160,6 @@ const Container = styled.section`
     font-size: 14px;
     align-self: center;
     margin-top: 25px;
+    font-family: 'Lato';
   }
 `
