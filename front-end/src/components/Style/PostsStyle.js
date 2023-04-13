@@ -5,7 +5,7 @@ const PostsStyle = styled.div`
   flex-direction: column;
   align-items: center;
   width: 611px;
-  height: 650px;
+  height: 430px;
   background-color: #52b6ff;
   border-radius: 16px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
