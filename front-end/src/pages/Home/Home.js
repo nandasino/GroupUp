@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import UserEvents from "../UserEvents/UserEvents";
+import Friends from "../Friends/Friends";
 
 export default function Home() {
   const [close, setClose] = useState(false);
@@ -22,7 +23,7 @@ export default function Home() {
       setPage(<CityEvents userCity={userCity} />)
     }
     if(pageSelected=="friends"){
-      setPage("Eventos de amigos")
+      setPage(<Friends/>)
     }
   }, [pageSelected]);
 
@@ -58,9 +59,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   background-color: #f2f2f2;
-  padding-bottom:100px;
+  padding-bottom:130px;
   padding-top:80px;
 `
 const Box = styled.div`

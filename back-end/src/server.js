@@ -6,6 +6,7 @@ import accountsRoute from "./routers/accounts.router.js";
 import usersRoute from "./routers/users.router.js";
 import eventsRoute from "./routers/events.router.js";
 import groupsRouter from "./routers/groups.router.js";
+import friendsRouter from "./routers/friends.router.js";
 
 dotenv.config()
 
@@ -16,6 +17,7 @@ app.use(accountsRoute);
 app.use(usersRoute);
 app.use(eventsRoute);
 app.use(groupsRouter);
+app.use(friendsRouter);
 
 const port = process.env.PORT
 

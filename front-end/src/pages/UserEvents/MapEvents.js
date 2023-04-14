@@ -23,7 +23,6 @@ export default function MapEvents() {
 
   return(
     <>
-      Criados por você
       {userEvents.map((event) => (
       <CardPostSyle>
         <Title>

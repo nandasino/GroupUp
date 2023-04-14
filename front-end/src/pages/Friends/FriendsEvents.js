@@ -2,19 +2,18 @@ import { getCityEvents } from "../../services/GroupUp";
 import { useState, useEffect } from "react";
 import { CardPostSyle, Title, Box } from "../../components/Style/CardPostStyle.js";
 import styled from "styled-components"; 
-import EnjoinGroup from "./EnjoinGroup";
+import EnjoinGroup from "../CityEvents/EnjoinGroup"
 import Partipants from "../Participants/Participants";
-import { TextContainer } from "../../components/Style/TextContainer";
+import { getFriendsEvents } from "../../services/GroupUp";
 
-export default function CityEvents({userCity}) {
-  const [cityEvents, setCityEvents] = useState([]);
-  const auth = JSON.parse(localStorage.getItem("groupUp"));
+export default function FriendsEvents() {
+  const [friendsEvents, setFriendsEvents] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventsData = (await getCityEvents(userCity)).data;
-        setCityEvents(eventsData);
+        const eventsData = (await getFriendsEvents()).data;
+        setFriendsEvents(eventsData);
       } catch (error) {
         console.log(error);
       }
@@ -23,14 +22,11 @@ export default function CityEvents({userCity}) {
   }, []);
   return(
     <>
-      {userCity==null ? 
-        <TextContainer>Selecione sua cidade para descobrir quais eventos estão havendo nela</TextContainer>
-        :
-        (<>{cityEvents.length==0 ?
-          (<TextContainer>Ainda não há nenhum evento criado em sua cidade</TextContainer>)
+        {friendsEvents.length==0 ?
+          ("Seus amigos não criaram nenhum evento ainda")
           :
           (<>
-            {cityEvents.map((event) => (
+            {friendsEvents.map((event) => (
               <CardPostSyle>
                 <Title>
                 <img className="profile" src={event.userProfile} alt="Profile"/>
@@ -55,17 +51,14 @@ export default function CityEvents({userCity}) {
                     <p>{event.description}</p>
                   </div>
                   <div className="vacancies">
-                    {event.userId===auth.id ? "" : 
-                    <EnjoinGroup vacancies={event.vacancies} eventId={event.id}/>}
+                    <EnjoinGroup vacancies={event.vacancies} eventId={event.id}/>
                   </div>
                     <Partipants vacancies={event.vacancies} eventId={event.id}/>
                 </Box>
               </CardPostSyle>
             ))}
           </>)
-          }
-        </>)
-      }
+        }
     </>
   )
 }

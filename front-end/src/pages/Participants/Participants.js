@@ -15,7 +15,6 @@ export default function Partipants({ vacancies, eventId }) {
     const fetchData = async () => {
       try {
         const groupsData = (await getGroups(eventId)).data
-        console.log(groupsData)
         const numberOfParticipants = groupsData.length;
         setPartipants(numberOfParticipants);
         setUsers(groupsData);
@@ -82,5 +81,7 @@ const UserBox = styled.div`
   font-size:11px;
   img{
     width:20px;
+    heigth:20px;
+    border-radius: 20px;
   }
 `

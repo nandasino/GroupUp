@@ -22,9 +22,13 @@ const CardPostSyle = styled.div`
     color: ;
   }
   img{
-    width: 70px;
-    border-radius:35px;
-    margin-right:5px;
+    margin-right:10px;
+    object-fit: cover;
+  }
+  .profile{
+    width:60px;
+    height:60px;
+    border-radius: 35px;
   }
   .titleAndDate{
     width: 100%;
@@ -91,7 +95,7 @@ const CardPostSyle = styled.div`
     font-size: 25px;
     align-items: center;
     justify-content: end;
-    margin-bottom:15px;
+    margin-bottom:5px;
   }
 
   @media (max-width: 614px) {
@@ -103,7 +107,10 @@ const Title = styled.div`
   width: 100%;
   display:flex;
   align-items: center;
-  margin-bottom:10px;
+  margin-bottom:5px;
+  @media (max-width: 614px) {
+    margin-left:20px;
+	}
 `
 const Box = styled.div`
   width: 90%;

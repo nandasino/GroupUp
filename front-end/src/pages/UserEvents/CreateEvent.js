@@ -196,6 +196,9 @@ const Title = styled.div`
   display:flex;
   align-items: center;
   margin-bottom:10px;
+  @media (max-width: 614px) {
+    margin-left:20px;
+	}
 `
 const Public = styled.div`
   color: #ffd900;

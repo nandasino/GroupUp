@@ -19,9 +19,11 @@ const PostsStyle = styled.div`
     color: #ffffff;
   }
   img{
-    width: 70px;
-    border-radius:35px;
-    margin-right:5px;
+    margin-right:10px;
+    width:60px;
+    height:60px;
+    border-radius: 35px;
+    object-fit: cover;
   }
   @media (max-width: 614px) {
 		border-radius: 0px;

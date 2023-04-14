@@ -18,7 +18,7 @@ export default function Footer({pageSelected, setPageSelected}) {
       <Container>
         <LogoDiv onClick={() => selectPage("city")} className={pageSelected === "city" ? 'selected' : ''}><ion-icon name="map-outline"></ion-icon><p>Em sua cidade</p></LogoDiv>
         <LogoDiv onClick={() => selectPage("mine")} className={pageSelected === "mine" ? 'selected' : ''}><ion-icon name="basketball-outline"></ion-icon><p>Seus grupos</p></LogoDiv>
-        <LogoDiv onClick={() => selectPage("friends")} className={pageSelected === "friends" ? 'selected' : ''}><ion-icon name="football-outline"></ion-icon><p>Grupos de amigos</p></LogoDiv>
+        <LogoDiv onClick={() => selectPage("friends")} className={pageSelected === "friends" ? 'selected' : ''}><ion-icon name="people-outline"></ion-icon><p>Amigos</p></LogoDiv>
       </Container>
     </>
   )

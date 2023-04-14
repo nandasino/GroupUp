@@ -8,7 +8,7 @@ export default function Navbar() {
     <>
       <Container>
         <LogoDiv>
-          <img src={Logo} alt="Logo" />
+          <img  className="logo" src={Logo} alt="Logo" />
           <h1>GroupUp</h1>
         </LogoDiv>
         <img className="profile" src={auth.image} alt="Profile"/>
@@ -29,12 +29,16 @@ const Container = styled.div`
   z-index:1;
   top: 0;
   left:0;
-  img{
+  .logo{
     width: 60px;
   }
   .profile{
-    border-radius:35px;
-    padding-right:10px;
+    width: 50px;
+    height: 50px;
+    border-radius:25px;
+    margin-right:10px;
+    border-radius: 35px;
+    object-fit: cover;
   }
 `
 const LogoDiv = styled.div`

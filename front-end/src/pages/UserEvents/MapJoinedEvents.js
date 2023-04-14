@@ -25,7 +25,6 @@ export default function MapJoinedEvents() {
 
   return(
     <>
-      Grupos que você participa
       {userEvents.map((event) => (
       <CardPostSyle>
         <Title>

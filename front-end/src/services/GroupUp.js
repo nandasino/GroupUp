@@ -85,6 +85,25 @@ async function getUserGroups() {
   const promise = await axios.get(`${process.env.REACT_APP_API}/groups`, config);
   return promise;
 }
+async function getRequests() {
+  const config = createHeaders();
+  const promise = await axios.get(`${process.env.REACT_APP_API}/requests`, config);
+  return promise;
+}
+
+async function requestAccepted(requestId) {
+  const config = createHeaders();
+  const promise = await axios.put(`${process.env.REACT_APP_API}/requests/${requestId}`, config);
+  return promise;
+}
+
+async function getFriendsEvents() {
+  const config = createHeaders();
+  console.log(config)
+  const promise = await axios.get(`${process.env.REACT_APP_API}/friends`, config);
+  return promise;
+}
+
 export {
   postSignIn,
   postSignUp,
@@ -99,4 +118,7 @@ export {
   deleteJoinGroup,
   getGroups,
   getUserGroups,
+  getRequests,
+  requestAccepted,
+  getFriendsEvents,
 };
