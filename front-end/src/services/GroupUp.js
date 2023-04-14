@@ -57,6 +57,29 @@ async function getUserEvents() {
   return promise;
 }
 
+async function getIfJoined(eventId) {
+  const config = createHeaders();
+  const promise = await axios.get(`${process.env.REACT_APP_API}/usergroup/${eventId}`, config);
+  return promise;
+}
+
+
+async function postJoinGroup(eventId) {
+  const config = createHeaders();
+  const promise = await axios.post(`${process.env.REACT_APP_API}/groups`, eventId, config);
+  return promise;
+}
+
+async function deleteJoinGroup(eventId) {
+  const config = createHeaders();
+  const promise = await axios.delete(`${process.env.REACT_APP_API}/groups/${eventId}`, config);
+  return promise;
+}
+async function getGroups(eventId) {
+  const config = createHeaders();
+  const promise = await axios.get(`${process.env.REACT_APP_API}/groups/${eventId}`, config);
+  return promise;
+}
 export {
   postSignIn,
   postSignUp,
@@ -66,4 +89,8 @@ export {
   getCategories,
   postEvent,
   getUserEvents,
+  getIfJoined,
+  postJoinGroup,
+  deleteJoinGroup,
+  getGroups,
 };

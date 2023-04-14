@@ -5,7 +5,7 @@ const CardPostSyle = styled.div`
   flex-direction: column;
   align-items: center;
   width: 611px;
-  height: 330px;
+  min-height: 330px;
   background-color: white;
   border-radius: 16px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -61,10 +61,13 @@ const CardPostSyle = styled.div`
   }
   .vacancies{
     display:flex;
+    width:100%;
     margin-top:15px;
     font-size:14px;
-    margin-top:15px;
+    align-items: center;
+    justify-content: space-between;
   }
+
   .description{
     background-color:#ecf7fb;
     display:flex;
@@ -84,6 +87,14 @@ const CardPostSyle = styled.div`
     justify-content: end;
     margin-bottom:15px;
   }
+  .participants{
+    display:flex;
+    width:100%;
+    margin-top:15px;
+    font-size:14px;
+    align-items: center;
+  }
+
   @media (max-width: 614px) {
 		border-radius: 0px;
     width:100%;

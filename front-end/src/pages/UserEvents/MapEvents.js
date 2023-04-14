@@ -22,7 +22,6 @@ export default function MapEvents() {
 
   return(
     <>
-    <Container>
       Criados por você
       {userEvents.map((event) => (
       <CardPostSyle>
@@ -48,12 +47,8 @@ export default function MapEvents() {
           <div className="description">
             <p>{event.description}</p>
           </div>
-          <div className="vacancies">
-            <p>{`Restam ${event.vacancies} vagas disponíveis`}</p>
-          </div>
         </Box>
       </CardPostSyle>))}
-      </Container>
     </>
   )
 }
