@@ -32,3 +32,21 @@ export async function getGroups({ eventId }) {
   WHERE "eventId" = $1
   ;`, [eventId]);
 }
+
+
+export async function getGroupsByUserId({ userId }) {
+	return db.query(`
+  SELECT
+  groups.id, groups."eventId",
+  events.id, events."userId",events.city, events.address,
+  events.date, events.hour, events.vacancies, events."isPublic", events.description,
+  categories.name AS "categoryName", 
+  users.image AS "userProfile",
+  users.name AS "userName"
+  FROM groups
+  JOIN events ON events.id = groups."eventId"
+  JOIN categories ON events."categoryId" = categories.id 
+  JOIN users ON users.id = events."userId"
+  WHERE groups."userId" = $1
+  ;`, [userId]);
+}

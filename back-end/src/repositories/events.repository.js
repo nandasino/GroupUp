@@ -2,7 +2,8 @@ import { db } from "../database/db.js"
 
 export async function getEventsByCity({ city }) {
 	return db.query(`
-  SELECT events.id, events."userId", events.city, events.address, events.date, events.hour, events.vacancies, events."isPublic", events.description, categories.name AS "categoryName" FROM events JOIN categories ON events."categoryId" = categories.id
+  SELECT events.id, events."userId", events.city, events.address, events.date, events.hour, events.vacancies, events."isPublic", events.description, categories.name AS "categoryName" 
+  FROM events JOIN categories ON events."categoryId" = categories.id
   WHERE city = $1 AND "isPublic"= true ORDER BY date
   ;`, [city]);
 }

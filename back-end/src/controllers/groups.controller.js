@@ -69,3 +69,16 @@ export async function getGroups(req, res){
       res.send(error);
   }
 }
+
+export async function getUserGorups(req, res){
+  const userId = res.locals.idUser;
+  try{
+      const groups = await groupsRepository.getGroupsByUserId({userId}); 
+      if(groups.rowCount==0){
+          return res.send([]);
+      }
+      res.status(200).send(groups.rows);
+  }catch(error){
+      res.send(error);
+  }
+}

@@ -80,6 +80,11 @@ async function getGroups(eventId) {
   const promise = await axios.get(`${process.env.REACT_APP_API}/groups/${eventId}`, config);
   return promise;
 }
+async function getUserGroups() {
+  const config = createHeaders();
+  const promise = await axios.get(`${process.env.REACT_APP_API}/groups`, config);
+  return promise;
+}
 export {
   postSignIn,
   postSignUp,
@@ -93,4 +98,5 @@ export {
   postJoinGroup,
   deleteJoinGroup,
   getGroups,
+  getUserGroups,
 };
