@@ -66,6 +66,12 @@ const CardPostSyle = styled.div`
     font-size:14px;
     align-items: center;
     justify-content: space-between;
+    .occupied{
+      color:red;
+    }
+    .available{
+      color:green;
+    }
   }
 
   .description{
@@ -86,13 +92,6 @@ const CardPostSyle = styled.div`
     align-items: center;
     justify-content: end;
     margin-bottom:15px;
-  }
-  .participants{
-    display:flex;
-    width:100%;
-    margin-top:15px;
-    font-size:14px;
-    align-items: center;
   }
 
   @media (max-width: 614px) {

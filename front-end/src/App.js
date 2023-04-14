@@ -10,10 +10,11 @@ import Home from "./pages/Home/Home.js";
 export default function App(){
   const [user, setUser] = useState(null);
   const [update, setUpdate] = useState(false);
+  const [enter, setEnter] = useState(false);
     return(
         <>
         <GlobalStyle/>
-        <UserContext.Provider value= {{ user, setUser, update, setUpdate }}>
+        <UserContext.Provider value= {{ user, setUser, update, setUpdate, enter, setEnter}}>
         <BrowserRouter>
         <Routes>
             <Route path= "/" element= {<SignIn/>}/>

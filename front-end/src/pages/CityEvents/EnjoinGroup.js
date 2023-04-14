@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components"; 
 import { getIfJoined, postJoinGroup, deleteJoinGroup, getGroups } from "../../services/GroupUp";
+import UserContext from "../../contexts/UserContext";
+import { useContext } from "react";
 
 export default function EnjoinGroup({ vacancies, eventId }) {
   const [joined, setJoined] = useState(false);
   const [avaliable, setAvaliable] = useState(0);
+  const { setEnter } = useContext(UserContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,9 +15,11 @@ export default function EnjoinGroup({ vacancies, eventId }) {
         const joinedMessage = (await getIfJoined(eventId)).data.message
         if (joinedMessage ==="joined") {
           setJoined(true);
+          setEnter(true);
         }
         if (joinedMessage ==="notJoined") {
           setJoined(false);
+          setEnter(false);
         }
         const groupsData = (await getGroups(eventId)).data
         const numberOfParticipants = groupsData.length;
@@ -49,7 +54,7 @@ export default function EnjoinGroup({ vacancies, eventId }) {
   }
   return(
     <>  
-      {avaliable <= 0 ? <p>Grupo Ocupado</p>: <p>{`Restam ${avaliable} vagas disponíveis`}</p>}
+      {avaliable <= 0 ? <p className="occupied">Grupo Ocupado</p>: <p className="available">{`Restam ${avaliable} vagas disponíveis`}</p>}
       {joined ? 
       (
         <Box onClick={()=> handleJoin("out")}>

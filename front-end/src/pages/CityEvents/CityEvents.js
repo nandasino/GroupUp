@@ -57,9 +57,7 @@ export default function CityEvents({userCity}) {
                     {event.userId===auth.id ? "" : 
                     <EnjoinGroup vacancies={event.vacancies} eventId={event.id}/>}
                   </div>
-                  <div className="participants">
                     <Partipants vacancies={event.vacancies} eventId={event.id}/>
-                  </div>
                 </Box>
               </CardPostSyle>
             ))}

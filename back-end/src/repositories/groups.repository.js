@@ -23,6 +23,12 @@ export async function deleteGroupByUserAndEventId({ eventId, userId}) {
 
 export async function getGroups({ eventId }) {
 	return db.query(`
-  SELECT * FROM groups WHERE "eventId" = $1
+  SELECT
+  groups.id, groups."eventId", groups."userId",
+  users.name AS "userName",
+  users.image AS image  
+  FROM groups
+  JOIN users ON users.id = groups."userId"
+  WHERE "eventId" = $1
   ;`, [eventId]);
 }

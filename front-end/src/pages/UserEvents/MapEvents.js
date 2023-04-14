@@ -4,6 +4,7 @@ import { useContext } from "react";
 import UserContext from "../../contexts/UserContext.js";
 import { getUserEvents } from "../../services/GroupUp";
 import { CardPostSyle, Title, Box } from "../../components/Style/CardPostStyle.js";
+import Partipants from "../Participants/Participants.js";
 
 export default function MapEvents() {
   const [userEvents, setUserEvents] = useState([]);
@@ -47,6 +48,7 @@ export default function MapEvents() {
           <div className="description">
             <p>{event.description}</p>
           </div>
+          <Partipants vacancies={event.vacancies} eventId={event.id}/>
         </Box>
       </CardPostSyle>))}
     </>
