@@ -38,7 +38,7 @@ export async function getGroupsByUserId({ userId }) {
 	return db.query(`
   SELECT
   groups.id, groups."eventId",
-  events.id, events."userId",events.city, events.address,
+  events.id, events.city, events.address,
   events.date, events.hour, events.vacancies, events."isPublic", events.description,
   categories.name AS "categoryName", 
   users.image AS "userProfile",

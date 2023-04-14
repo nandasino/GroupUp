@@ -5,11 +5,11 @@ import UserContext from "../../contexts/UserContext.js";
 import { getUserGroups } from "../../services/GroupUp";
 import { CardPostSyle, Title, Box } from "../../components/Style/CardPostStyle.js";
 import Partipants from "../Participants/Participants.js";
-import EnjoinGroup from "../CityEvents/EnjoinGroup.js";
+import OutGroup from "./OutGroup.js";
 
 export default function MapJoinedEvents() {
   const [userEvents, setUserEvents] = useState([]);
-  const { update } = useContext(UserContext);
+  const { update, enter } = useContext(UserContext);
   const auth = JSON.parse(localStorage.getItem("groupUp"));
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +21,7 @@ export default function MapJoinedEvents() {
       }
     };
     fetchData();
-  }, [update, userEvents]);
+  }, [userEvents, enter]);
 
   return(
     <>
@@ -51,8 +51,7 @@ export default function MapJoinedEvents() {
             <p>{event.description}</p>
           </div>
           <div className="vacancies">
-            {event.userId===auth.id ? "" : 
-            <EnjoinGroup vacancies={event.vacancies} eventId={event.id}/>}
+            <OutGroup vacancies={event.vacancies} eventId={event.id}/>
           </div>
           <Partipants vacancies={event.vacancies} eventId={event.id}/>
         </Box>
