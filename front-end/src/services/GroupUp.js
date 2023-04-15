@@ -91,6 +91,12 @@ async function getRequests() {
   return promise;
 }
 
+async function getRequest(friendId) {
+  const config = createHeaders();
+  const promise = await axios.get(`${process.env.REACT_APP_API}/friends/${friendId}`, config);
+  return promise;
+}
+
 async function requestAccepted(requestId) {
   const config = createHeaders();
   const promise = await axios.put(`${process.env.REACT_APP_API}/requests/${requestId}`, config);
@@ -99,8 +105,12 @@ async function requestAccepted(requestId) {
 
 async function getFriendsEvents() {
   const config = createHeaders();
-  console.log(config)
   const promise = await axios.get(`${process.env.REACT_APP_API}/friends`, config);
+  return promise;
+}
+async function getUserByName(name) {
+  const config = createHeaders();
+  const promise = await axios.get(`${process.env.REACT_APP_API}/users/${name}`);
   return promise;
 }
 
@@ -119,6 +129,8 @@ export {
   getGroups,
   getUserGroups,
   getRequests,
+  getRequest,
   requestAccepted,
   getFriendsEvents,
+  getUserByName,
 };

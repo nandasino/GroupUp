@@ -22,7 +22,7 @@ export async function updateFriendsById({ requestId }) {
   `,[requestId]);
 }
 
-export async function getFriendsEvents({userId}) {
+export async function getFriendsEvents({ userId }) {
 	return db.query(`
   SELECT 
   events.id, events."userId", events.city, events.address,
@@ -36,6 +36,7 @@ export async function getFriendsEvents({userId}) {
   JOIN categories ON events."categoryId" = categories.id 
   WHERE friends."userId" = $1 AND friends.accepted = true ORDER BY date;`, [userId]);
 }
-/*export async function getFriendsEvents({ userId }) {
-	return db.query(`SELECT * FROM friends WHERE "userId"=$1;`, [userId]);
-}*/
+export async function getFriendByFriendId({ userId, friendId }) {
+	return db.query(`
+  SELECT * FROM friends WHERE "userId" = $1 AND "friendId" = $2;`, [userId, friendId]);
+}

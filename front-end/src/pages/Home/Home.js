@@ -55,13 +55,14 @@ export default function Home() {
 
 const Container = styled.div`
   width:100%;
-  min-height: 60vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #f2f2f2;
   padding-bottom:130px;
   padding-top:80px;
+  box-sizing: border-box;
 `
 const Box = styled.div`
   display:flex;

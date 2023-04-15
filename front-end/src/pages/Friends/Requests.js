@@ -44,11 +44,14 @@ export default function Requests() {
 }
 
 const Container = styled.div`
-  width:90%;
+  width: 611px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (max-width: 614px) {
+		width:90%;
+  }
 `
 const RequestDiv = styled.div`
   width:100%;

@@ -257,8 +257,8 @@ const Container = styled.div`
     color: #707070;
   }
   input::placeholder {
-    color: #707070;
-    font-size: 15px;
+    color: #c6c6c6;
+    font-size: 19px;
     font-weight: 400;
     font-family: 'Lato';
     font-style: normal;

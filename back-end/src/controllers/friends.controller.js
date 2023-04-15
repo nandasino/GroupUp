@@ -40,3 +40,16 @@ export async function getFriendsEvents(req, res){
       res.send(error);
   }
 }
+export async function getUserRequest(req, res){
+  const userId = res.locals.idUser;
+  const { friendId } = req.params;
+  try{
+      const requests = await friendsRepository.getFriendByFriendId({userId, friendId}); 
+      if(requests.rowCount==0){
+          return res.send([]);
+      }
+      res.status(200).send(requests.rows[0]);
+  }catch(error){
+      res.send(error);
+  }
+}
