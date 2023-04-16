@@ -14,10 +14,24 @@ export async function getUserByName(req,res){
   const { name } = req.params;
   try{
     const user = await usersRepository.getUserByName({ name }); 
-    if(user.rowCount==0){
+    if(!user){
         return res.send([]);
     }
-    res.status(200).send(user.rows[0]);
+    res.status(200).send(user);
+  }catch(error){
+    res.send(error);
+  }
+}
+
+export async function getUserById(req,res){
+  const { id } = req.params;
+  const idNumber = Number(id);
+  try{
+    const user = await usersRepository.getUserInfo({ idNumber }); 
+    if(!user){
+      return res.sendStatus(404);
+    }
+    res.status(200).send(user);
   }catch(error){
     res.send(error);
   }

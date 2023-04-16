@@ -39,6 +39,12 @@ async function getUser() {
   return promise;
 }
 
+async function getUserById(id) {
+  const promise = await axios.get(`${process.env.REACT_APP_API}/user/${id}`);
+  return promise;
+}
+
+
 async function getCategories() {
   const promise = await axios.get(`${process.env.REACT_APP_API}/catergories`);
   return promise;
@@ -120,6 +126,7 @@ export {
   getCityEvents,
   updateCity,
   getUser,
+  getUserById,
   getCategories,
   postEvent,
   getUserEvents,

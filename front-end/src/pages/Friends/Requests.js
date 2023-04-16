@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getRequests, requestAccepted } from "../../services/GroupUp";
 import styled from "styled-components";
+import RequestUser from "./RequestUser";
 
 export default function Requests() {
   const [requests, setRequests] = useState([]);
@@ -31,7 +32,7 @@ export default function Requests() {
         {requests.map((request) => (
           <RequestDiv>
             <User>
-            <img src={request.image}/><p>{`${request.name} quer ver os grupos criados por você`}</p>
+              <RequestUser userId={request.userId}/>
             </User>
             <Accept onClick={() => sentAccept(request.id)}>
               <ion-icon name="add-outline"></ion-icon>

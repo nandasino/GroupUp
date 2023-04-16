@@ -8,7 +8,7 @@ export async function getCityEvents(req, res){
       if(eventsExist.rowCount==0){
           return res.sendStatus(404);
       }
-      res.status(200).send(eventsExist.rows);
+      res.status(200).send(eventsExist);
   }catch(error){
       res.send(error);
   }
@@ -20,7 +20,7 @@ export async function getCategories(req, res){
       if(categories.rowCount==0){
           return res.sendStatus(404);
       }
-      res.status(200).send(categories.rows);
+      res.status(200).send(categories);
   }catch(error){
       res.send(error);
   }
@@ -65,7 +65,7 @@ export async function getUserEvents(req, res){
       if(events.rowCount==0){
           return res.sendStatus(404);
       }
-      res.status(200).send(events.rows);
+      res.status(200).send(events);
   }catch(error){
       res.send(error);
   }

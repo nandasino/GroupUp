@@ -1,4 +1,4 @@
-import {db} from "../database/db.js";
+import * as accountsRepository from "../repositories/accounts.repository.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
@@ -13,7 +13,8 @@ export async function authValidation(req, res, next){
     try {
         const data = jwt.verify(token, secretKey);
         const dataId = data.userId;
-        const user = (await db.query('SELECT * FROM users WHERE id = $1;', [dataId])).rows[0];
+        //const user = (await db.query('SELECT * FROM users WHERE id = $1;', [dataId])).rows[0];
+        const user = await accountsRepository.getUser({dataId})
         res.locals.idUser = dataId;
         res.locals.user = user;
         next();

@@ -28,7 +28,7 @@ export async function signIn(req, res){
     try{
 
         const userExists = await accountsRepository.getUserByEmail({email});
-        const user = userExists.rows[0];
+        const user = userExists;
         const image = user.image;
         const city = user.city;
         const id = user.id;

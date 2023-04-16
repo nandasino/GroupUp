@@ -1,28 +1,75 @@
-import { db } from "../database/db.js"
+import prisma from "../database/db.js";
 
-export async function getEventById({ eventId }) {
-	return db.query(`
+export async function getEventById({ idEvent }) {
+  return prisma.events.findFirst({
+    where: {
+      id: idEvent
+    }
+  })
+	/*return db.query(`
   SELECT * FROM events WHERE "id" = $1
-  ;`, [eventId]);
+  ;`, [eventId]);*/
 }
-export async function getGroupByUserAndEventId({ eventId, userId }) {
-	return db.query(`
+export async function getGroupByUserAndEventId({ idEvent, userId }) {
+  return prisma.groups.findFirst({
+    where: {
+      eventId: idEvent,
+      userId: userId
+    }
+  })
+	/*return db.query(`
   SELECT * FROM groups WHERE "eventId" = $1 AND "userId" = $2
-  ;`, [eventId, userId]);
+  ;`, [eventId, userId]);*/
 }
 
-export async function createGroup({ eventId, userId}) {
-	return db.query(`INSERT INTO groups ("eventId", "userId") VALUES ($1, $2);`,
+export async function createGroup({ idEvent, userId}) {
+  return prisma.groups.create({
+    data: {
+      eventId: idEvent,
+      userId: userId
+    }
+  })
+	/*return db.query(`INSERT INTO groups ("eventId", "userId") VALUES ($1, $2);`,
+  [eventId, userId]);*/
+}
+
+/*export async function deleteGroupByUserAndEventId({ idEvent, userId }) {
+  return prisma.groups.delete({
+    where: {
+      eventId:idEvent,
+      userId:userId
+    }
+  })
+	/*return db.query(`DELETE FROM groups WHERE "eventId" = $1 AND "userId" = $2;`,
   [eventId, userId]);
+}*/
+
+export async function deleteGroup({groupId}) {
+  return prisma.groups.delete({
+    where: {
+      id: groupId
+    }
+  })
 }
 
-export async function deleteGroupByUserAndEventId({ eventId, userId}) {
-	return db.query(`DELETE FROM groups WHERE "eventId" = $1 AND "userId" = $2;`,
-  [eventId, userId]);
-}
-
-export async function getGroups({ eventId }) {
-	return db.query(`
+export async function getGroups({ idEvent }) {
+  return prisma.groups.findMany({
+    where: {
+      eventId: idEvent
+    },
+    select: {
+      id:true,
+      eventId:true,
+      userId:true,
+      users: {
+        select: {
+          name: true,
+          image: true
+        },
+      }
+    }
+  })
+	/*return db.query(`
   SELECT
   groups.id, groups."eventId", groups."userId",
   users.name AS "userName",
@@ -30,12 +77,46 @@ export async function getGroups({ eventId }) {
   FROM groups
   JOIN users ON users.id = groups."userId"
   WHERE "eventId" = $1
-  ;`, [eventId]);
+  ;`, [eventId]);*/
 }
 
 
 export async function getGroupsByUserId({ userId }) {
-	return db.query(`
+  return prisma.groups.findMany({
+    where: {
+      userId:userId
+    },
+    select: {
+      id:true,
+      eventId:true,
+      userId:true,
+      events: {
+        select: {
+          id: true,
+          userId: true,
+          city: true,
+          address: true,
+          date:true,
+          hour:true,
+          vacancies: true,
+          isPublic: true,
+          description:true,
+          categories: {
+            select: {
+              name:true
+            }
+          },
+          users: {
+            select: {
+              name: true,
+              image: true
+            }
+          }
+        }
+      }
+    }
+  })
+	/*return db.query(`
   SELECT
   groups.id, groups."eventId",
   events.id, events.city, events.address,
@@ -48,5 +129,5 @@ export async function getGroupsByUserId({ userId }) {
   JOIN categories ON events."categoryId" = categories.id 
   JOIN users ON users.id = events."userId"
   WHERE groups."userId" = $1
-  ;`, [userId]);
+  ;`, [userId]);*/
 }

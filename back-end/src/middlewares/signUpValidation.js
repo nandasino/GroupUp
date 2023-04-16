@@ -1,5 +1,5 @@
 import { signUpSchema } from "../models/signUp.model.js";
-import {db} from "../database/db.js";
+import * as usersRepository from "../repositories/users.repository.js";
 
 export async function signUpValidation(req, res, next){
     const {name,email,password,confirmPassword,image} = req.body;
@@ -13,9 +13,10 @@ export async function signUpValidation(req, res, next){
         return res.status(422).send({message:"Senhas diferentes."});
     }
 
-    const emailExists = await db.query("SELECT * FROM  users WHERE email = $1", [email]);
+    //const emailExists = await db.query("SELECT * FROM  users WHERE email = $1", [email]);
+    const emailExists = await usersRepository.getUserByEmail({email});
     
-    if (emailExists.rowCount > 0){
+    if (emailExists){
         return res.sendStatus(409);
     }
 

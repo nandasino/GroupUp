@@ -1,29 +1,68 @@
-import { db } from "../database/db.js"
+import prisma from "../database/db.js";
 
 export async function getFriendsByFriendId({ userId }) {
-	return db.query(`
+  return prisma.friends.findMany({
+    where: {
+      friendId: userId,
+      accepted: false
+    }
+  })
+	/*return db.query(`
   SELECT
   friends.id, friends."userId", friends."friendId",
   users.name, users.image
   FROM friends
   JOIN users ON users.id = friends."userId"
   WHERE friends."friendId" = $1 AND friends.accepted = false
-  ;`, [userId]);
+  ;`, [userId]);*/
 }
 
-export async function getFriendById({ requestId }) {
-	return db.query(`
-  SELECT * FROM friends WHERE id = $1;`, [requestId]);
+export async function getFriendById({ id }) {
+  return prisma.friends.findUnique({
+    where: {
+      id
+    }
+  })
+	/*return db.query(`
+  SELECT * FROM friends WHERE id = $1;`, [requestId]);*/
 }
 
 
-export async function updateFriendsById({ requestId }) {
-	return db.query(`UPDATE friends SET accepted = true WHERE id = $1;
-  `,[requestId]);
+export async function updateFriendsById({ id }) {
+  return prisma.friends.update({
+    where: {
+      id
+    },
+    data: {
+      accepted: true
+    }
+  })
+	/*return db.query(`UPDATE friends SET accepted = true WHERE id = $1;
+  `,[requestId]);*/
 }
 
 export async function getFriendsEvents({ userId }) {
-	return db.query(`
+  return prisma.friends.findMany({
+    where: {
+      userId: userId,
+      accepted: true
+    },
+    select: {
+      users: {
+        select: {
+          name: true,
+          image: true,
+          events: {
+            select: {
+              events: true,
+              categories: true
+            }
+          }
+        },
+      }
+    }
+  })
+	/*return db.query(`
   SELECT 
   events.id, events."userId", events.city, events.address,
   events.date, events.hour, events.vacancies, events."isPublic", events.description,
@@ -34,9 +73,15 @@ export async function getFriendsEvents({ userId }) {
   JOIN users ON users.id = friends."friendId"
   JOIN events ON events."userId" = users.id
   JOIN categories ON events."categoryId" = categories.id 
-  WHERE friends."userId" = $1 AND friends.accepted = true ORDER BY date;`, [userId]);
+  WHERE friends."userId" = $1 AND friends.accepted = true ORDER BY date;`, [userId]);*/
 }
-export async function getFriendByFriendId({ userId, friendId }) {
-	return db.query(`
-  SELECT * FROM friends WHERE "userId" = $1 AND "friendId" = $2;`, [userId, friendId]);
+export async function getFriendByFriendId({ userId, idFriend }) {
+	/*return db.query(`
+  SELECT * FROM friends WHERE "userId" = $1 AND "friendId" = $2;`, [userId, friendId]);*/
+  return prisma.friends.findFirst({
+    where: {
+      userId: userId,
+      friendId: idFriend
+    }
+  })
 }
