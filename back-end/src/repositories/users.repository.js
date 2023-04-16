@@ -36,3 +36,11 @@ export async function getUserInfo({ idNumber }) {
     }
   })
 }
+
+export async function getUserById({ id }) {
+  return prisma.users.findFirst({
+    where: {
+      id
+    }
+  })
+}

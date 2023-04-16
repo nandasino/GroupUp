@@ -84,3 +84,14 @@ export async function getFriendsByUserId({ userId }) {
   JOIN categories ON events."categoryId" = categories.id 
   WHERE friends."userId" = $1 AND friends.accepted = true ORDER BY date;`, [userId]);*/
 }
+
+export async function createRequest({ idUser, id }) {
+  return prisma.friends.create({
+    data: {
+      userId: idUser,
+      friendId: id
+    }
+  })
+	/*return db.query(`UPDATE friends SET accepted = true WHERE id = $1;
+  `,[requestId]);*/
+}

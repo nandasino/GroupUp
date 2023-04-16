@@ -1,4 +1,5 @@
 import * as friendsRepository from "../repositories/friends.repository.js";
+import * as usersRepository from "../repositories/users.repository.js";
 
 export async function getUserRequests(req, res){
   const userId = res.locals.idUser;
@@ -54,4 +55,21 @@ export async function getUserRequest(req, res){
   }catch(error){
       res.send(error);
   }
+}
+
+export async function postRequest(req,res){
+  const { friendId, userId } = req.body;
+  const id = Number(friendId);
+  const idUser = Number(userId);
+
+  try {
+      const userExist = await usersRepository.getUserById({id}); 
+      if(!userExist){
+        return res.sendStatus(404);
+      }
+      await friendsRepository.createRequest({ idUser, id });
+      res.sendStatus(201);
+    } catch (error) {
+      res.status(422).send(error);
+    }
 }

@@ -109,6 +109,11 @@ async function requestAccepted(requestId) {
   return promise;
 }
 
+async function postRequest(body) {
+  const promise = await axios.post(`${process.env.REACT_APP_API}/requests/`, body);
+  return promise;
+}
+
 async function getFriends() {
   const config = createHeaders();
   const promise = await axios.get(`${process.env.REACT_APP_API}/friends`, config);
@@ -143,6 +148,7 @@ export {
   getRequests,
   getRequest,
   requestAccepted,
+  postRequest,
   getFriends,
   getUserByName,
   getFriendEvents,

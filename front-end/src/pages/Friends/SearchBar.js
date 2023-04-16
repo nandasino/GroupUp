@@ -7,6 +7,7 @@ export default function SearchBar() {
   const [search, setSearch] = useState('');
   const [user, setUser] = useState([]);
   const [show, setShow] = useState(false);
+  const auth = JSON.parse(localStorage.getItem("groupUp"));
 
   async function handleForm(e){
     e.preventDefault();
@@ -35,8 +36,8 @@ export default function SearchBar() {
         {user.length==0 ? "usuário não encontrado"
         : 
         <>
-          <img src={user.image}/>{user.name}
-          <RequestButton userId={user.id} user={user}/>
+            <div className="user"><img src={user.image}/>{user.name}</div>
+            {user.id == auth.id ? "": <RequestButton userId={user.id} user={user}/>}
         </>}
       </Box>
     </>
@@ -50,7 +51,12 @@ const Box = styled.div`
   align-items: center;
   box-sizing:border-box;
   padding-left:10px;
+  justify-content: space-between;
   display: ${(props) => (props.show ? "flex" : "none")};
+  .user{
+    display:flex;
+    align-items: center;
+  }
   @media (max-width: 614px) {
 		width:90%;
   }
@@ -62,7 +68,6 @@ const Box = styled.div`
     object-fit: cover;
   }
 `
-
 const Container = styled.div`
   width: 611px;
   display: flex;

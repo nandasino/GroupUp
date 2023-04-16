@@ -28,7 +28,6 @@ export default function SignIn() {
         city: data.data.city,
         id: data.data.id,
       });
-      console.log(data.data.token);
       setUser(data.data);
       localStorage.setItem("groupUp", JSONauth);
 
