@@ -154,6 +154,7 @@ const Container = styled.section`
     align-items: center;
     justify-content: center;
     opacity: ${(props) => (props.disabled ? "0.7" : "1")};
+    cursor:pointer;
   }
   a {
     color: #52b6ff;

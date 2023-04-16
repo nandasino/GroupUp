@@ -57,4 +57,5 @@ const Box = styled.div`
   width:150px;
   align-items: center;
   justify-content: space-between;
+  cursor:pointer;
 `

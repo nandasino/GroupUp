@@ -51,7 +51,9 @@ const Box = styled.div`
   align-items: center;
   box-sizing:border-box;
   padding-left:10px;
+  padding-right:10px;
   justify-content: space-between;
+  font-family: "Lato";
   display: ${(props) => (props.show ? "flex" : "none")};
   .user{
     display:flex;

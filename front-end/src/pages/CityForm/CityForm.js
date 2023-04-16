@@ -71,6 +71,7 @@ const Box = styled.div`
     background-color: #ffffff;
   }
   button {
+    cursor:pointer;
     margin-top: 20px;
     font-family: 'Lato';
     border: none;

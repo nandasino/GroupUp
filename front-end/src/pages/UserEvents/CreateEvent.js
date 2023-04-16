@@ -196,6 +196,7 @@ const Public = styled.div`
   font-family: 'Lato';
   font-style: normal;
   font-weight: 400;
+  cursor:pointer;
   p{
     font-size: 20px;
     margin-right:5px;
@@ -251,6 +252,7 @@ const Container = styled.div`
     font-style: normal;
   }
   .sendButton {
+    cursor:pointer;
     font-family: 'Lato';
     border: none;
     border: none;

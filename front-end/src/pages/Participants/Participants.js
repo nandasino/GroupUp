@@ -30,9 +30,9 @@ export default function Partipants({ vacancies, eventId }) {
       <Box>
         <p>{`Esse grupo tem ${participants} participantes até o momento`}</p>
         <SeeAll onClick={()=>setExpand(!expand)}>
-          {expand ? <ion-icon name="arrow-up-outline"></ion-icon>
+          {expand ? <div><ion-icon name="arrow-up-outline"></ion-icon></div>
           : 
-          <><ion-icon name="people-outline"></ion-icon><p>Ver todos</p></>}
+          <div><ion-icon name="people-outline"></ion-icon><p>Ver todos</p></div>}
         </SeeAll>
       </Box>
       <Users>
@@ -72,6 +72,11 @@ const SeeAll = styled.div`
   width:80px;
   align-items: center;
   justify-content: flex-end;
+  div{
+    display:flex;
+    cursor:pointer;
+    align-items: center;
+  }
 `
 const UserBox = styled.div`
   display:flex;

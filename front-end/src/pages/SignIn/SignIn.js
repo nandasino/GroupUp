@@ -123,6 +123,7 @@ const Container = styled.section`
     outline: 0;
   }
   button {
+    cursor:pointer;
     font-family: 'Lato';
     border: none;
     background-color: #52b6ff;

@@ -90,6 +90,7 @@ const Accept = styled.div`
   padding-right:15px;
   color: white;
   font-size:18px;
+  cursor:pointer;
   ion-icon{
     font-size: 25px;
   }

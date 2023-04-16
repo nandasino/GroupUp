@@ -35,7 +35,7 @@ export default function RequestButton({userId, user}) {
   return(
     <>
       {request.length === 0 ? 
-      <Add onClick={() => sendRequest()}>Adicionar</Add>
+      <Add onClick={() => sendRequest()}><ion-icon name="add-outline"></ion-icon>Adicionar</Add>
       :
       <>{request.accepted ? "seu amigo" : "solicitado"}</>}
     </>
