@@ -9,6 +9,16 @@ const TextContainer = styled.div`
   font-family: 'Lato';
   font-style: normal;
   font-size:20px;
+  font-weight: 300;
+  margin-bottom:15px;
+  img{
+    width: 50px;
+    height: 50px;
+    border-radius:25px;
+    margin-right:10px;
+    border-radius: 35px;
+    object-fit: cover;
+  }
 `
 export {
   TextContainer,

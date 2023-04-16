@@ -36,7 +36,7 @@ export default function Partipants({ vacancies, eventId }) {
         </SeeAll>
       </Box>
       <Users>
-        {expand ? <>{users.map((user) => <UserBox><img src={user.image}/>{user.userName}</UserBox>)}</> : ""}
+        {expand ? <>{users.map((user) => <UserBox><img src={user.users.image}/>{user.users.name}</UserBox>)}</> : ""}
       </Users>
     </Container>
   )

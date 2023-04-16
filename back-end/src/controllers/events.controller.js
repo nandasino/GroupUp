@@ -70,3 +70,17 @@ export async function getUserEvents(req, res){
       res.send(error);
   }
 }
+
+export async function getFriendEvents(req, res){
+  const { userId } = req.params;
+  const friendId = Number(userId)
+  try{
+      const events = await eventsRepository.getEventsByFriendId(friendId); 
+      if(events.rowCount==0){
+          return res.sendStatus(404);
+      }
+      res.status(200).send(events);
+  }catch(error){
+      res.send(error);
+  }
+}

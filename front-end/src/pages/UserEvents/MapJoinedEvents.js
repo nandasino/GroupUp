@@ -28,31 +28,31 @@ export default function MapJoinedEvents() {
       {userEvents.map((event) => (
       <CardPostSyle>
         <Title>
-        <img className="profile" src={event.userProfile} alt="Profile"/>
-        <h1>{event.userName}</h1>
+        <img className="profile" src={event.events.users.image} alt="Profile"/>
+        <h1>{event.events.users.name}</h1>
         </Title>
         <Box>
         <div className="public">
-          {event.isPublic ? <ion-icon name="earth-sharp"></ion-icon> : <ion-icon name="lock-closed-sharp"></ion-icon> }
+          {event.events.isPublic ? <ion-icon name="earth-sharp"></ion-icon> : <ion-icon name="lock-closed-sharp"></ion-icon> }
         </div>
         <div className="titleAndDate">
-          <h1>{event.categoryName}</h1>
+          <h1>{event.events.categories.name}</h1>
           <div className="time">
-            <p>{`${(event.date).substr(8, 2)}/${(event.date).substr(5, 2)}/${(event.date).substr(0,4)}`}</p>
-            <p>{event.hour}</p>
+            <p>{`${(event.events.date).substr(8, 2)}/${(event.events.date).substr(5, 2)}/${(event.events.date).substr(0,4)}`}</p>
+            <p>{event.events.hour}</p>
           </div>
         </div>
           <div className="city">
             <ion-icon name="location-outline"></ion-icon>
-            <p>{`${event.city}, ${event.address}`}</p>
+            <p>{`${event.events.city}, ${event.events.address}`}</p>
           </div>
           <div className="description">
-            <p>{event.description}</p>
+            <p>{event.events.description}</p>
           </div>
           <div className="vacancies">
-            <OutGroup vacancies={event.vacancies} eventId={event.id}/>
+            <OutGroup vacancies={event.events.vacancies} eventId={event.events.id}/>
           </div>
-          <Partipants vacancies={event.vacancies} eventId={event.id}/>
+          <Partipants vacancies={event.events.vacancies} eventId={event.events.id}/>
         </Box>
       </CardPostSyle>))}
     </>

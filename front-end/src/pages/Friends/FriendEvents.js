@@ -1,36 +1,32 @@
-import { getCityEvents } from "../../services/GroupUp";
 import { useState, useEffect } from "react";
 import { CardPostSyle, Title, Box } from "../../components/Style/CardPostStyle.js";
 import styled from "styled-components"; 
-import EnjoinGroup from "./EnjoinGroup";
+import EnjoinGroup from "../CityEvents/EnjoinGroup"
 import Partipants from "../Participants/Participants";
-import { TextContainer } from "../../components/Style/TextContainer";
+import { getFriendEvents } from "../../services/GroupUp.js";
 
-export default function CityEvents({userCity}) {
-  const [cityEvents, setCityEvents] = useState([]);
-  const auth = JSON.parse(localStorage.getItem("groupUp"));
+export default function FriendEvents({friendId}) {
+  const [friendEvents, setFriendEvents] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventsData = (await getCityEvents(userCity)).data;
-        setCityEvents(eventsData);
+        const eventsData = (await getFriendEvents(friendId)).data;
+        setFriendEvents(eventsData);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
   }, []);
+
   return(
     <>
-      {userCity==null ? 
-        <TextContainer>Selecione sua cidade para descobrir quais eventos estão havendo nela</TextContainer>
-        :
-        (<>{cityEvents.length==0 ?
-          (<TextContainer>Ainda não há nenhum evento criado em sua cidade</TextContainer>)
+        {friendEvents.length==0 ?
+          ("Não criou nenhum grupo ainda")
           :
           (<>
-            {cityEvents.map((event) => (
+            {friendEvents.map((event) => (
               <CardPostSyle>
                 <Title>
                 <img className="profile" src={event.users.image} alt="Profile"/>
@@ -55,25 +51,14 @@ export default function CityEvents({userCity}) {
                     <p>{event.description}</p>
                   </div>
                   <div className="vacancies">
-                    {event.userId===auth.id ? "" : 
-                    <EnjoinGroup vacancies={event.vacancies} eventId={event.id}/>}
+                    <EnjoinGroup vacancies={event.vacancies} eventId={event.id}/>
                   </div>
                     <Partipants vacancies={event.vacancies} eventId={event.id}/>
                 </Box>
               </CardPostSyle>
             ))}
           </>)
-          }
-        </>)
-      }
+        }
     </>
   )
 }
-
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width:100%;
-`

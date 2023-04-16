@@ -1,8 +1,8 @@
 import Requests from "./Requests";
 import { TextContainer } from "../../components/Style/TextContainer";
-import FriendsEvents from "./FriendsEvents";
 import SearchBar from "./SearchBar";
 import styled from "styled-components";
+import MapFriends from "./MapFriends";
 
 export default function Friends() {
   return(
@@ -13,9 +13,9 @@ export default function Friends() {
       </TextContainer>
       <Requests/>
       <TextContainer>
-        Grupos de amigos
+        Seguindo
       </TextContainer>
-      <FriendsEvents/>
+      <MapFriends/>
     </Container>
   )
 }

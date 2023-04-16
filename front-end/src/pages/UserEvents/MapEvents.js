@@ -26,15 +26,15 @@ export default function MapEvents() {
       {userEvents.map((event) => (
       <CardPostSyle>
         <Title>
-        <img className="profile" src={event.userProfile} alt="Profile"/>
-        <h1>{event.userName}</h1>
+        <img className="profile" src={event.users.image} alt="Profile"/>
+        <h1>{event.users.name}</h1>
         </Title>
         <Box>
         <div className="public">
           {event.isPublic ? <ion-icon name="earth-sharp"></ion-icon> : <ion-icon name="lock-closed-sharp"></ion-icon> }
         </div>
         <div className="titleAndDate">
-          <h1>{event.categoryName}</h1>
+          <h1>{event.categories.name}</h1>
           <div className="time">
             <p>{`${(event.date).substr(8, 2)}/${(event.date).substr(5, 2)}/${(event.date).substr(0,4)}`}</p>
             <p>{event.hour}</p>

@@ -109,7 +109,7 @@ async function requestAccepted(requestId) {
   return promise;
 }
 
-async function getFriendsEvents() {
+async function getFriends() {
   const config = createHeaders();
   const promise = await axios.get(`${process.env.REACT_APP_API}/friends`, config);
   return promise;
@@ -117,6 +117,11 @@ async function getFriendsEvents() {
 async function getUserByName(name) {
   const config = createHeaders();
   const promise = await axios.get(`${process.env.REACT_APP_API}/users/${name}`);
+  return promise;
+}
+async function getFriendEvents(friendId) {
+  const config = createHeaders();
+  const promise = await axios.get(`${process.env.REACT_APP_API}/userevents/${friendId}`, config);
   return promise;
 }
 
@@ -138,6 +143,7 @@ export {
   getRequests,
   getRequest,
   requestAccepted,
-  getFriendsEvents,
+  getFriends,
   getUserByName,
+  getFriendEvents,
 };

@@ -41,18 +41,32 @@ export async function updateFriendsById({ id }) {
   `,[requestId]);*/
 }
 
-export async function getFriendsEvents({ userId }) {
+export async function getFriendByFriendId({ userId, idFriend }) {
+	/*return db.query(`
+  SELECT * FROM friends WHERE "userId" = $1 AND "friendId" = $2;`, [userId, friendId]);*/
+  return prisma.friends.findFirst({
+    where: {
+      userId: userId,
+      friendId: idFriend
+    }
+  })
+}
+
+export async function getFriendsByUserId({ userId }) {
   return prisma.friends.findMany({
     where: {
       userId: userId,
       accepted: true
     },
     select: {
-      users_friends_userIdTousers: {
+      id: true,
+      userId:true,
+      friendId:true,
+      accepted:true,
+      users_friends_friendIdTousers: {
         select: {
           name:true,
-          image:true,
-          events: true
+          image:true
         }
       }
     }
@@ -69,14 +83,4 @@ export async function getFriendsEvents({ userId }) {
   JOIN events ON events."userId" = users.id
   JOIN categories ON events."categoryId" = categories.id 
   WHERE friends."userId" = $1 AND friends.accepted = true ORDER BY date;`, [userId]);*/
-}
-export async function getFriendByFriendId({ userId, idFriend }) {
-	/*return db.query(`
-  SELECT * FROM friends WHERE "userId" = $1 AND "friendId" = $2;`, [userId, friendId]);*/
-  return prisma.friends.findFirst({
-    where: {
-      userId: userId,
-      friendId: idFriend
-    }
-  })
 }

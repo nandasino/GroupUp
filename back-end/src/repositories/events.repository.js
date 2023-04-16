@@ -20,6 +20,12 @@ export async function getEventsByCity({ city }) {
         select: {
           name: true
         }
+      },
+      users: {
+        select: {
+          name:true,
+          image:true
+        }
       }
     }
   })
@@ -90,4 +96,34 @@ export async function getEventsByUser(userId) {
   JOIN categories ON events."categoryId" = categories.id 
   JOIN users ON users.id = events."userId"
   WHERE "userId" = $1 ORDER BY date;`, [userId]);*/
+}
+
+export async function getEventsByFriendId(friendId) {
+  return prisma.events.findMany({
+    where: {
+      userId: friendId
+    },
+    select:{
+      id: true,
+      userId: true,
+      city: true,
+      address: true,
+      date:true,
+      hour:true,
+      vacancies: true,
+      isPublic: true,
+      description:true,
+      categories: {
+        select: {
+          name:true
+        }
+      },
+      users: {
+        select: {
+          name: true,
+          image: true
+        }
+      }
+    }
+  })
 }

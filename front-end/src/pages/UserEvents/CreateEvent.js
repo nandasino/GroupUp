@@ -55,20 +55,6 @@ export default function CreateEvent() {
 		setPost({ ...post, [e.target.name]: e.target.value });
 	}
 
-  const dateFormatAux = (date) => {
-    const d = new Date(date);
-    let month = '' + (d.getMonth() + 1)
-    let day = ''+ d.getDate();
-    let year = d.getFullYear();
-    if(month.length < 2) {
-      month = '0'+ month;
-    }
-    if(day.length < 2) {
-      day = '0'+ day;
-    }
-    return [year,month,day].join('-');
-  }
- 
   async function handleForm(e) {
     e.preventDefault();
     if(citySelected == "") {
@@ -81,22 +67,23 @@ export default function CreateEvent() {
     }
     const string = new Date(selectedDate).toString();
     const hour = string.substr(16, 5);
-    const date = dateFormatAux(selectedDate);
-    
+    const dataformat = new Date(selectedDate).toISOString();
+
+    const category = Number(categorySelected);
+
     const postObject = {
-			date: date,
+			date: dataformat,
       hour: hour,
       isPublic: isPublic,
       city: citySelected,
       address: post.address,
-      categoryId: categorySelected,
+      categoryId: category,
 			vacancies: counter,
       description: post.description,
     }
     try {
       await postEvent(postObject);
       setUpdate(true);
-      console.log(postObject)
     } catch (error) {
       console.log(error);
     }

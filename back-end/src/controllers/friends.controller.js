@@ -29,10 +29,10 @@ export async function updateFriendsById(req,res){
     }
 }
 
-export async function getFriendsEvents(req, res){
+export async function getFriends(req, res){
   const userId = res.locals.idUser;
   try{
-      const eventsExist = await friendsRepository.getFriendsEvents({userId}); 
+      const eventsExist = await friendsRepository.getFriendsByUserId({userId}); 
       if(eventsExist.rowCount==0){
           return res.sendStatus(404);
       }
