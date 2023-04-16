@@ -31,12 +31,11 @@ model events {
 }
 
 model friends {
-  id                            Int     @id @default(autoincrement())
-  userId                        Int
-  friendId                      Int
-  accepted                      Boolean @default(false)
-  users_friends_friendIdTousers users   @relation("friends_friendIdTousers", fields: [friendId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users_friends_userIdTousers   users   @relation("friends_userIdTousers", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id       Int     @id @default(autoincrement())
+  userId   Int
+  friendId Int
+  accepted Boolean @default(false)
+  users    users   @relation(fields: [friendId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model groups {
@@ -56,16 +55,15 @@ model sessions {
 }
 
 model users {
-  id                              Int        @id @default(autoincrement())
-  email                           String
-  password                        String
-  name                            String
-  image                           String
-  city                            String?
-  createdAt                       DateTime   @default(now()) @db.Timestamp(6)
-  events                          events[]
-  friends_friends_friendIdTousers friends[]  @relation("friends_friendIdTousers")
-  friends_friends_userIdTousers   friends[]  @relation("friends_userIdTousers")
-  groups                          groups[]
-  sessions                        sessions[]
+  id        Int        @id @default(autoincrement())
+  email     String
+  password  String
+  name      String
+  image     String
+  city      String?
+  createdAt DateTime   @default(now()) @db.Timestamp(6)
+  events    events[]
+  friends   friends[]
+  groups    groups[]
+  sessions  sessions[]
 }

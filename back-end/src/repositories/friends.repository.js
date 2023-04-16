@@ -48,17 +48,12 @@ export async function getFriendsEvents({ userId }) {
       accepted: true
     },
     select: {
-      users: {
+      users_friends_userIdTousers: {
         select: {
-          name: true,
-          image: true,
-          events: {
-            select: {
-              events: true,
-              categories: true
-            }
-          }
-        },
+          name:true,
+          image:true,
+          events: true
+        }
       }
     }
   })
