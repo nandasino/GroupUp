@@ -63,10 +63,10 @@ export async function getFriendsByUserId({ userId }) {
       userId:true,
       friendId:true,
       accepted:true,
-      users_friends_friendIdTousers: {
+      users: {
         select: {
           name:true,
-          image:true
+          image: true
         }
       }
     }

@@ -35,7 +35,7 @@ export async function getFriends(req, res){
   try{
       const eventsExist = await friendsRepository.getFriendsByUserId({userId}); 
       if(eventsExist.rowCount==0){
-          return res.sendStatus(404);
+          return res.send([]);
       }
       res.status(200).send(eventsExist);
   }catch(error){

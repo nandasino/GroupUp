@@ -29,7 +29,7 @@ export default function MapFriends() {
       {friends.map((friend) => (
         <>
           <TextContainer>
-            <img src={friend.users_friends_friendIdTousers.image}/><p>{friend.users_friends_friendIdTousers.name}</p>
+            <img src={friend.users.image}/><p>{friend.users.name}</p>
           </TextContainer>
           <FriendEvents friendId={friend.friendId}/>
           </>
